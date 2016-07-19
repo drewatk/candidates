@@ -2,8 +2,14 @@ var Twitter = require('twitter');
 var async = require('async');
 var natural = require ('natural');
 
-// var pgp = require('pg-promise')(/*options*/);
-// var db = pgp('postgres://username:password@host:port/database');
+const INTERVAL = 60000;
+
+var pgp = require('pg-promise')();
+var db = pgp({
+  database: 'candidates',
+  user: 'postgres',
+  password: 'postgres'
+});
 
 // load classifiers
 var trumpClassifier = natural.BayesClassifier.restore(require('../classifiers/trumpClassifier.json'));
@@ -73,11 +79,25 @@ async.forEachOf(candidates, function(candidate, key, callback) {
   // Every minute, log the average to the database and reset the average
   setInterval(function() {
     // TODO: Log to the database
+    db.none(
+      "INSERT INTO $1~(TIME, INTERVAL, NUMBER_OF_TWEETS, PERCENT_POSITIVE) values(CURRENT_TIMESTAMP, '$2# seconds', $3, $4)", 
+      [key, INTERVAL, tweetCounter.numTweets, tweetCounter.percentPositive()]
+    )
+    .then(function () {
+      console.log('saved to db');
+    })
+    .catch(function (error) {
+      console.log(error);
+      if (error) 
+        throw error;
+    });
+
+
     console.log(key + ': ' + tweetCounter.numTweets + ' tweets');
     console.log(key + ': ' + tweetCounter.percentPositive() + '% positive');
     tweetCounter.reset();
 
-  }, 60000);
+  }, INTERVAL);
 
   callback();
 });

@@ -7,9 +7,18 @@ var data = {
   ]
 };
 
-new Chartist.Line('#tweets', data);
-new Chartist.Line('#sentiment', data);
+var tweetsChart = new Chartist.Line('#tweets', data);
+var sentimentChart = new Chartist.Line('#sentiment', data);
+
+var updateGraphs = function() {
+  $.get('/tweets/sentiment/hour', function(data) {
+    console.log(data);
+    sentimentChart.update(data);
+  });
+};
 
 $(document).ready(function() {
-    console.log('JQUERY YEAHHHHHH')
-})
+
+
+    updateGraphs();
+});

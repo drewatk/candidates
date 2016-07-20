@@ -1,8 +1,7 @@
 var Twitter = require('twitter');
 var async = require('async');
-var natural = require ('natural');
-
-const INTERVAL = 60000;
+var natural = require('natural');
+var config = require('../config');
 
 var pgp = require('pg-promise')();
 var db = pgp({
@@ -10,6 +9,9 @@ var db = pgp({
   user: 'postgres',
   password: 'postgres'
 });
+
+// Interval in ms for when to log tweets to database
+const INTERVAL = 60000;
 
 // load classifiers
 var trumpClassifier = natural.BayesClassifier.restore(require('../classifiers/trumpClassifier.json'));
@@ -27,12 +29,8 @@ var candidates = {
   }
 };
 
-var twitterClient = new Twitter({
-  consumer_key: '',
-  consumer_secret: '',
-  access_token_key: '',
-  access_token_secret: ''
-});
+// Set up twitter client from config variable
+var twitterClient = new Twitter(config.twitter);
 
 async.forEachOf(candidates, function(candidate, key, callback) {
 
@@ -84,7 +82,7 @@ async.forEachOf(candidates, function(candidate, key, callback) {
       [key, INTERVAL, tweetCounter.numTweets, tweetCounter.percentPositive()]
     )
     .then(function () {
-      console.log('saved to db');
+      // console.log('saved to db');
     })
     .catch(function (error) {
       console.log(error);

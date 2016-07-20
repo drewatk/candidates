@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "train": "node ./classifiers/trainClassifiers.js"
+    "train": "node ./classifiers/trainClassifiers.js",
+    "watch": "nodemon ./bin/www"
   },
   "dependencies": {
     "async": "^2.0.0",
@@ -14,6 +15,7 @@
     "express": "~4.13.4",
     "morgan": "~1.7.0",
     "natural": "^0.4.0",
+    "node-sass-middleware": "^0.9.8",
     "pg-promise": "^5.2.2",
     "pug": "^2.0.0-beta4",
     "serve-favicon": "~2.3.0",

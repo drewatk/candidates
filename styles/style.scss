@@ -1,0 +1,7 @@
+$font-stack:    'Hack', Helvetica, sans-serif;
+$primary-color: red;
+
+body p {
+  font: 100% $font-stack;
+  color: $primary-color;
+}

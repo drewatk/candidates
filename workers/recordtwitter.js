@@ -78,8 +78,8 @@ async.forEachOf(candidates, function(candidate, key, callback) {
   setInterval(function() {
     // TODO: Log to the database
     db.none(
-      "INSERT INTO $1~(TIME, INTERVAL, NUMBER_OF_TWEETS, PERCENT_POSITIVE) values(CURRENT_TIMESTAMP, '$2# seconds', $3, $4)", 
-      [key, INTERVAL, tweetCounter.numTweets, tweetCounter.percentPositive()]
+      "INSERT INTO tweets(CANDIDATE, TIME, INTERVAL, NUMBER_OF_TWEETS, PERCENT_POSITIVE) values($1, CURRENT_TIMESTAMP, '$2# seconds', $3, $4)", 
+      [key, INTERVAL / 1000, tweetCounter.numTweets, tweetCounter.percentPositive()]
     )
     .then(function () {
       // console.log('saved to db');

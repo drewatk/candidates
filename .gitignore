@@ -39,3 +39,6 @@ jspm_packages
 
 # Config file 
 config.js
+
+# VS Code
+.vscode

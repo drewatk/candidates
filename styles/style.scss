@@ -1,7 +1,16 @@
 $font-stack:    'Hack', Helvetica, sans-serif;
-$primary-color: red;
+$light-red: #FF3930;
+$dark-blue: #196CB2;
+$background-color: #FEFFE3;
+$light-blue: #4D91CC;
+$dark-red: #B23C37;
 
-body p {
-  font: 100% $font-stack;
-  color: $primary-color;
+body {
+  background: $background-color;
+  color: $dark-red;
+}
+
+.btn {
+  background: $light-blue;
+  color: $background-color;
 }

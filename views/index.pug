@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  .row
+    .col.md-4
+      .btn-group.btn-group-sm(role='group' aria-label='Change frequency of graph')
+        button#hourly.btn.btn-default(type='button') Hourly
+        button#daily.btn.btn-default(type='button') Daily
+        button#monthly.btn.btn-default(type='button') Monthly
+  .row
+    .col-md-6
+      #tweets.ct-chart.ct-perfect-fourth
+    .col-md-6
+      #sentiment.ct-chart.ct-perfect-fourth

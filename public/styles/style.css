@@ -1,3 +1,7 @@
-body p {
-  font: 100% "Hack", Helvetica, sans-serif;
-  color: red; }
+body {
+  background: #FEFFE3;
+  color: #B23C37; }
+
+.btn {
+  background: #4D91CC;
+  color: #FEFFE3; }

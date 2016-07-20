@@ -19,7 +19,7 @@ app.set('view engine', 'pug');
 app.use(sassMiddleware({
   src: __dirname,
   dest: path.join(__dirname, 'public'),
-  debug: false,
+  debug: true,
 
 }));
 

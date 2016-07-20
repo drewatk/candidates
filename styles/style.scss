@@ -1,3 +1,6 @@
+@import "chartist-settings.scss";
+@import "chartist.scss";
+
 $font-stack:    'Hack', Helvetica, sans-serif;
 $light-red: #FF3930;
 $dark-blue: #196CB2;
@@ -14,3 +17,4 @@ body {
   background: $light-blue;
   color: $background-color;
 }
+

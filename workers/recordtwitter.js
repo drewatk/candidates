@@ -39,6 +39,9 @@ async.forEachOf(candidates, function(candidate, key, callback) {
     numTweets: 0,
     numPositive: 0,
     percentPositive() { return 100 * (this.numPositive / this.numTweets); },
+    tweetsPerHour(interval = INTERVAL) { 
+      return ((3600000 * this.numTweets) / interval);
+    },
     reset() {
       this.numTweets = 0;
       this.numPositive = 0;
@@ -78,8 +81,8 @@ async.forEachOf(candidates, function(candidate, key, callback) {
   setInterval(function() {
     // TODO: Log to the database
     db.none(
-      "INSERT INTO tweets(CANDIDATE, TIME, INTERVAL, NUMBER_OF_TWEETS, PERCENT_POSITIVE) values($1, CURRENT_TIMESTAMP, '$2# seconds', $3, $4)", 
-      [key, INTERVAL / 1000, tweetCounter.numTweets, tweetCounter.percentPositive()]
+      "INSERT INTO tweets(CANDIDATE, TIME, TWEETS_PER_HOUR, NUMBER_OF_TWEETS, PERCENT_POSITIVE) values($1, CURRENT_TIMESTAMP, $2, $3, $4)", 
+      [key, tweetCounter.tweetsPerHour(INTERVAL), tweetCounter.numTweets, tweetCounter.percentPositive()]
     )
     .then(function () {
       // console.log('saved to db');
@@ -92,6 +95,7 @@ async.forEachOf(candidates, function(candidate, key, callback) {
 
 
     console.log(key + ': ' + tweetCounter.numTweets + ' tweets');
+    console.log(key + ': ' + tweetCounter.tweetsPerHour() + ' tph');
     console.log(key + ': ' + tweetCounter.percentPositive() + '% positive');
     tweetCounter.reset();
 

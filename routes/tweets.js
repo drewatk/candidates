@@ -32,7 +32,7 @@ router.get('/:interval', function(req, res, next) {
       return;
   }
 
-  db.any("SELECT PERCENT_POSITIVE, NUMBER_OF_TWEETS, TIME, CANDIDATE FROM tweets WHERE TIME >= NOW() - '$1^'::INTERVAL", [interval])
+  db.any("SELECT PERCENT_POSITIVE, TWEETS_PER_HOUR, TIME, CANDIDATE FROM tweets WHERE TIME >= NOW() - '$1^'::INTERVAL", [interval])
   .then(data => {
     res.json(data);
   })

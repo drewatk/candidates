@@ -54,7 +54,7 @@ var updateGraphs = function(interval = 'hour') {
           data: _.map(trumpTweets, function(t) {
             if(t.candidate === 'trump') 
               return {
-                y: t.number_of_tweets,
+                y: t.tweets_per_hour,
                 x: moment(t.time).format('x')
               };
           })
@@ -63,7 +63,7 @@ var updateGraphs = function(interval = 'hour') {
           data: _.map(clintonTweets, function(t) {
             if(t.candidate === 'clinton') 
               return {
-                y: t.number_of_tweets,
+                y: t.tweets_per_hour,
                 x: moment(t.time).format('x')
               };
           })

@@ -8,25 +8,31 @@ var db = pgp({
 });
 
 /* GET tweets */
-router.get('/:graph/:interval', function(req, res, next) {
+router.get('/:interval', function(req, res, next) {
   
-  var column = '';
-  switch (req.params.graph) {
-    case 'sentiment': column = 'PERCENT_POSITIVE'; break;
-    case 'popularity': column = 'NUMBER_OF_TWEETS'; break;
+  // var column = '';
+  // switch (req.params.graph) {
+  //   case 'sentiment': column = 'PERCENT_POSITIVE'; break;
+  //   case 'popularity': column = 'NUMBER_OF_TWEETS'; break;
+  //   default:
+  //     res.status(400);
+  //     res.send(`Incorrect value ${req.params.graph} for "graph"`);
+  //     return;
+  // }
+
+  var interval = '';
+  switch (req.params.interval) {
+    case 'hour': interval = '1 hour'; break;
+    case 'day': interval = '1 day'; break;
+    case 'week': interval = '7 days'; break;
+    case 'month': interval = '1 month'; break;
     default:
       res.status(400);
-      res.send(`Incorrect value ${req.params.graph} for "graph"`);
+      res.send(`Incorrect value ${req.params.interval} for "interval"`);
       return;
   }
 
-  if (!(req.params.interval === 'day' || req.params.interval === 'hour' || req.params.interval === 'month')) {
-    res.status(400);
-    res.send(`Incorrect value ${req.params.interval} for "interval"`);
-    return;
-  }
-
-  db.any("SELECT $1^, PERCENT_POSITIVE, TIME FROM tweets WHERE TIME >= NOW() - '1 $2^'::INTERVAL", [column, req.params.interval])
+  db.any("SELECT PERCENT_POSITIVE, NUMBER_OF_TWEETS, TIME, CANDIDATE FROM tweets WHERE TIME >= NOW() - '$1^'::INTERVAL", [interval])
   .then(data => {
     res.json(data);
   })

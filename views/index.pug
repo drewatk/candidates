@@ -5,9 +5,10 @@ block content
   .row
     .col.md-4
       .btn-group.btn-group-sm(role='group' aria-label='Change frequency of graph')
-        button#hourly.btn.btn-default(type='button') Hourly
-        button#daily.btn.btn-default(type='button') Daily
-        button#monthly.btn.btn-default(type='button') Monthly
+        button#hour.btn.btn-default(type='button' data-interval='hour') Hour
+        button#day.btn.btn-default(type='button' data-interval='day') Day
+        butotn#week.btn.btn-default(type='button' data-interval='week') Week
+        button#monthly.btn.btn-default(type='button' data-interval='month') Month
   .row
     .col-md-6
       #tweets.ct-chart.ct-golden-section
@@ -19,4 +20,5 @@ block content
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
     script(src='//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js')
     script(src='/vendor/moment.js')
+    script(src='/vendor/lodash.core.js')
     script(src='/js/index.js')

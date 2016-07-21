@@ -11,7 +11,7 @@ var db = pgp({
 });
 
 // Interval in ms for when to log tweets to database
-const INTERVAL = 60000;
+const INTERVAL = 60000 * 5;
 
 // load classifiers
 var trumpClassifier = natural.BayesClassifier.restore(require('../classifiers/trumpClassifier.json'));

@@ -48,7 +48,7 @@ async.forEachOf(candidates, function(candidate, key, callback) {
   var stream = twitterClient.stream('statuses/filter', {
     'track': candidate.keywords,
     'language': 'en',
-    'filter_level': 'low'
+    // 'filter_level': 'low'
   });
   stream.on('data', function(tweet) { 
 

@@ -45,7 +45,11 @@ async.forEachOf(candidates, function(candidate, key, callback) {
 
   };
 
-  var stream = twitterClient.stream('statuses/filter', {'track': candidate.keywords});
+  var stream = twitterClient.stream('statuses/filter', {
+    'track': candidate.keywords,
+    'language': 'en',
+    'filter_level': 'low'
+  });
   stream.on('data', function(tweet) { 
 
     // ignore empty tweets, retweets, and quotes

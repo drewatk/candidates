@@ -75,7 +75,9 @@ async.forEachOf(candidates, function(candidate, key, callback) {
 
   // Every minute, log the average to the database and reset the average
   setInterval(function() {
-    // TODO: Log to the database
+    if (isNaN(tweetCounter.percentPositive() || isNan(tweetCounter.tweetsPerHour()))) {
+      throw new Error('Got NaN, this might mean that the twitter stream has lost connection');
+    }
     db.none(
       "INSERT INTO tweets(CANDIDATE, TIME, TWEETS_PER_HOUR, NUMBER_OF_TWEETS, PERCENT_POSITIVE) values($1, CURRENT_TIMESTAMP, $2, $3, $4)", 
       [key, tweetCounter.tweetsPerHour(INTERVAL), tweetCounter.numTweets, tweetCounter.percentPositive()]
@@ -89,7 +91,6 @@ async.forEachOf(candidates, function(candidate, key, callback) {
         throw error;
     });
 
-
     console.log(key + ': ' + tweetCounter.numTweets + ' tweets');
     console.log(key + ': ' + tweetCounter.tweetsPerHour() + ' tph');
     console.log(key + ': ' + tweetCounter.percentPositive() + '% positive');
@@ -99,5 +100,3 @@ async.forEachOf(candidates, function(candidate, key, callback) {
 
   callback();
 });
-
-

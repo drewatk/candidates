@@ -1,20 +1,15 @@
-@import "chartist-settings.scss";
-@import "chartist.scss";
+@import 'chartist-settings';
+@import 'chartist';
 
 $font-stack:    'Hack', Helvetica, sans-serif;
-$light-red: #FF3930;
-$dark-blue: #196CB2;
-$background-color: #FEFFE3;
-$light-blue: #4D91CC;
-$dark-red: #B23C37;
+
+$background-color: #F7F7F7;
 
 body {
   background: $background-color;
-  color: $dark-red;
 }
 
-.btn {
-  background: $light-blue;
-  color: $background-color;
+.btn-group {
+  padding-left: 15px;
+  padding-right: 15px;
 }
-

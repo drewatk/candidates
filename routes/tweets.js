@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pgp = require('pg-promise')();
-var db = pgp({
-  database: 'candidates',
-  user: 'postgres',
-  password: 'postgres'
-});
+var config = require('../config');
+var db = pgp(config.pgp);
 
 /* GET tweets */
 router.get('/:interval', function(req, res, next) {

@@ -4,11 +4,7 @@ var natural = require('natural');
 var config = require('../config');
 
 var pgp = require('pg-promise')();
-var db = pgp({
-  database: 'candidates',
-  user: 'postgres',
-  password: 'postgres'
-});
+var db = pgp(config.pgp);
 
 // Interval in ms for when to log tweets to database
 const INTERVAL = 60000 * 5;

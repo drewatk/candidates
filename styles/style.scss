@@ -1,9 +1,9 @@
 @import 'chartist-settings';
 @import 'chartist';
 
-$font-stack:    'Hack', Helvetica, sans-serif;
+@import 'colors';
 
-$background-color: #F7F7F7;
+$font-stack:    'Hack', Helvetica, sans-serif;
 
 body {
   background: $background-color;

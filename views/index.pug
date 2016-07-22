@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  h1= title
+  h1 Candidates #[small Polling the 2016 Presidential Race with Twitter]
   .row
-    .col.md-4
+    .col.md-12
       .btn-group.btn-group-sm(role='group' aria-label='Change frequency of graph')
         button#hour.btn.btn-default(type='button' data-interval='hour') Hour
         button#day.btn.btn-default(type='button' data-interval='day') Day
@@ -11,9 +11,11 @@ block content
         button#monthly.btn.btn-default(type='button' data-interval='month') Month
   .row
     .col-md-6
-      #tweets.ct-chart.ct-golden-section
+      h3 Popularity #[small Number of Tweets Per Hour]
+      #tweets.ct-chart.ct-square
     .col-md-6
-      #sentiment.ct-chart.ct-golden-section
+      h3 Sentiment #[small Percentage of Positive Tweets]
+      #sentiment.ct-chart.ct-square
 
     script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
     // Latest compiled and minified Bootstrap JavaScript

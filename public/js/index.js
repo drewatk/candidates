@@ -3,8 +3,6 @@ var sentimentChart = new Chartist.Line('#sentiment', {});
 
 var updateGraphs = function(interval = 'hour') {
   $.get('/tweets/' + interval, function(data) {
-    console.log(data);
-
     var trumpTweets = _.filter(data, function(t) {
       return (t.candidate === 'trump');
     });
@@ -40,11 +38,20 @@ var updateGraphs = function(interval = 'hour') {
       fullWidth: true,
       axisX: {
         type: Chartist.FixedScaleAxis,
-        divisor: 6,
+        divisor: 5,
         labelInterpolationFnc: function(value) {
-          return moment(Math.round(value)).format('ddd, h:mm a');
+          return moment(Math.round(value)).format('MMM, D h:mma');
         }
-      }
+      },
+      axisY: {
+        type: Chartist.AutoScaleAxis,
+        high: 100,
+        low: 0,
+        onlyInteger: true
+      },
+      lineSmooth: Chartist.Interpolation.monotoneCubic({
+        fillHoles: false
+      }),
     });
 
     tweetsChart.update({
@@ -75,11 +82,18 @@ var updateGraphs = function(interval = 'hour') {
       fullWidth: true,
       axisX: {
         type: Chartist.FixedScaleAxis,
-        divisor: 6,
+        divisor: 5,
         labelInterpolationFnc: function(value) {
-          return moment(Math.round(value)).format('ddd, h:mm a');
+          return moment(Math.round(value)).format('MMM, D h:mma');
         }
-      }
+      },
+      axisY: {
+        low: 0,
+        onlyInteger: true
+      },
+      lineSmooth: Chartist.Interpolation.monotoneCubic({
+        fillHoles: false
+      }),
     });
   });
 };

@@ -1,5 +1,3 @@
-// Average lat/long of every state
-// Data from http://dev.maxmind.com/geoip/legacy/codes/state_latlon/
 [
   {
     "state": "AK",

@@ -62,6 +62,11 @@ async.forEachOf(candidates, function(candidate, key, callback) {
     tweetCounter.numTweets++; // increment
 
     if (tweet.coordinates && tweet.coordinates.type === "Point" && tweet.coordinates.coordinates) {
+      // swap lat and long
+      var tmp = tweet.coordinates.coordinates[0];
+      tweet.coordinates.coordinates[0] = tweet.coordinates.coordinates[1];
+      tweet.coordinates.coordinates[1] = tmp;
+
       db.none(
         "INSERT INTO locations(COORDINATES, POSITIVE, CANDIDATE, STATE, TIME) values($1, $2, $3, $4, CURRENT_TIMESTAMP)", 
         [tweet.coordinates.coordinates, tweet.isPositive, key, getState(tweet.coordinates.coordinates)]

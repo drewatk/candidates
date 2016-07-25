@@ -2,6 +2,7 @@ var Twitter = require('twitter');
 var async = require('async');
 var natural = require('natural');
 var config = require('../config');
+var getState = require('./getState');
 
 var pgp = require('pg-promise')();
 var db = pgp(config.pgp);
@@ -60,11 +61,16 @@ async.forEachOf(candidates, function(candidate, key, callback) {
     tweet.isPositive = candidate.classifier.classify(tweet.text) === 'positive';
     tweetCounter.numTweets++; // increment
 
-    if (key == 'trump' && tweet.isPositive) {
-      // console.log('POS: ' + tweet.text);
-    }
-    else if (key == 'trump' && !tweet.isPositive) {
-      // console.log('NEG: ' + tweet.text);
+    if (tweet.coordinates) {
+      db.none(
+        "INSERT INTO locations(COORDINATES, POSITIVE, CANDIDATE, STATE, TIME) values($1, $2, $3, $4, CURRENT_TIMESTAMP)", 
+        [tweet.coordinates, tweet.isPositive, key, getState(tweet.coordinates)]
+      )
+      .catch(function (error) {
+        console.log(error);
+        if (error)
+          throw error;
+      });
     }
 
     // Increment numPositive if the tweet is positive

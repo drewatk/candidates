@@ -61,7 +61,7 @@ async.forEachOf(candidates, function(candidate, key, callback) {
     tweet.isPositive = candidate.classifier.classify(tweet.text) === 'positive';
     tweetCounter.numTweets++; // increment
 
-    if (tweet.coordinates.type === "Point" && tweet.coordinates.coordinates) {
+    if (tweet.coordinates && tweet.coordinates.type === "Point" && tweet.coordinates.coordinates) {
       db.none(
         "INSERT INTO locations(COORDINATES, POSITIVE, CANDIDATE, STATE, TIME) values($1, $2, $3, $4, CURRENT_TIMESTAMP)", 
         [tweet.coordinates.coordinates, tweet.isPositive, key, getState(tweet.coordinates.coordinates)]

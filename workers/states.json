@@ -1,5 +1,10 @@
 [
   {
+    "state": "NYC",
+    "latitude": 40.7167,
+    "longitude": -74
+  },
+  {
     "state": "AK",
     "latitude": 61.385,
     "longitude": -152.2683

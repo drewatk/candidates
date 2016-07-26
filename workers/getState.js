@@ -28,7 +28,7 @@ var distance = function(p1, p2) {
 
 /* 
   takes coordinates in format [lat, long] and returns 2 digit state code of nearest state (best guess of state it is in)
-  Warning: this is not exact, it calculates the closest average lat/long of a state, for example: NYC fails and returns NJ
+  Warning: this is not exact, it calculates the closest average lat/long of a state
 */
 var getState = function(coordinates) {
   if (!Array.isArray(coordinates) || coordinates.length !== 2) {
@@ -49,6 +49,10 @@ var getState = function(coordinates) {
       minState = state;
     }
   }
+
+  // special case made for NYC
+  if (minState === 'NYC')
+    minState = 'NY';
 
   return minState; // return state with lowest distance
 

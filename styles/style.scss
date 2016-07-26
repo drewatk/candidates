@@ -3,13 +3,23 @@
 
 @import 'colors';
 
-$font-stack:    'Hack', Helvetica, sans-serif;
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 body {
   background: $background-color;
+  font-family: $font-stack;
 }
 
 .btn-group {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#map-row {
+  height: 500px;
+  padding-bottom: 10px;
+}
+
+#states-map {
+  height: 100%;
 }

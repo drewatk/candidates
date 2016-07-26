@@ -66,13 +66,15 @@ async.forEachOf(candidates, function(candidate, key, callback) {
       var tmp = tweet.coordinates.coordinates[0];
       tweet.coordinates.coordinates[0] = tweet.coordinates.coordinates[1];
       tweet.coordinates.coordinates[1] = tmp;
+      
+      // TODO: Make a bounding box and discard tweets outside of US
 
       db.none(
         "INSERT INTO locations(COORDINATES, POSITIVE, CANDIDATE, STATE, TIME) values($1, $2, $3, $4, CURRENT_TIMESTAMP)", 
         [tweet.coordinates.coordinates, tweet.isPositive, key, getState(tweet.coordinates.coordinates)]
       )
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
         if (error)
           throw error;
       });
@@ -101,7 +103,7 @@ async.forEachOf(candidates, function(candidate, key, callback) {
       // console.log('saved to db');
     })
     .catch(function (error) {
-      console.log(error);
+      console.error(error);
       if (error) 
         throw error;
     });

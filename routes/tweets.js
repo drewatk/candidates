@@ -4,18 +4,20 @@ var pgp = require('pg-promise')();
 var config = require('../config');
 var db = pgp(config.pgp);
 
+// Allow Cross origin
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+/* GET tweets/states */
+router.get('/states', function(req, res, next) {
+  db.many();
+});
+
 /* GET tweets */
 router.get('/:interval', function(req, res, next) {
-  
-  // var column = '';
-  // switch (req.params.graph) {
-  //   case 'sentiment': column = 'PERCENT_POSITIVE'; break;
-  //   case 'popularity': column = 'NUMBER_OF_TWEETS'; break;
-  //   default:
-  //     res.status(400);
-  //     res.send(`Incorrect value ${req.params.graph} for "graph"`);
-  //     return;
-  // }
 
   var interval = '';
   switch (req.params.interval) {

@@ -2,8 +2,10 @@ extends layout
 
 block content
   h1 Candidates #[small Polling the 2016 Presidential Race with Twitter]
-  .row#map-row
-    #states-map
+  .row
+    .col.md-12#map-col
+      h3 Map #[small Share of Positive Tweets by State]
+      #states-map
   .row
     .col.md-12
       .btn-group.btn-group-sm(role='group' aria-label='Change frequency of graph')

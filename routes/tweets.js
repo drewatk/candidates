@@ -13,7 +13,14 @@ router.use(function(req, res, next) {
 
 /* GET tweets/states */
 router.get('/states', function(req, res, next) {
-  db.many();
+  db.many("SELECT * FROM STATES")
+  .then(data => {
+    res.json(data);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  });
 });
 
 /* GET tweets */

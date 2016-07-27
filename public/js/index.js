@@ -104,6 +104,7 @@ var getColor = function(d) {
           d > 75  ? '#d6604d' :
           d > 62.5  ? '#f4a582' :
           d > 50  ? '#fddbc7' :
+          d === 50 ? '#f7f7f7' :
           d > 37.5   ? '#d1e5f0' :
           d > 25   ? '#92c5de' :
           d > 12.5   ? '#4393c3' :
@@ -127,11 +128,14 @@ var main = function() {
   }).addTo(statesMap);
   // Load state areas data and locations
   var d1 = $.get('/js/stateAreas.json'); // these are jQuery deffered objects
-  var d2 = $.get('/tweets/hour');
-  $.when(d1, d2).done(function(stateAreas, locations) {
+  var d2 = $.get('/tweets/states');
+  $.when(d1, d2).done(function(stateAreas, states) {
+    console.log(states[0]);
+    states = _.keyBy(states[0], 'state');
+    console.log(states);
     L.geoJson(stateAreas, { style: function(feature) {
       return {
-        fillColor: getColor(feature.properties.density),
+        fillColor: getColor(states[feature.properties.postalCode].percent_positive),
         weight: 2,
         opacity: 1,
         color: 'white',

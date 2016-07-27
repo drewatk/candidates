@@ -15,4 +15,4 @@ CREATE TABLE locations (
 CREATE TABLE states (
     STATE CHAR(2),
     PERCENT_POSITIVE REAL
-)
+);

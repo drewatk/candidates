@@ -11,27 +11,26 @@ var catchError = function(error) {
     throw error;
 };
 
-var calcMap = function() {
-  stateCodes.forEach((state, index) => {
-    db.any("SELECT CANDIDATE FROM locations WHERE STATE = $1 AND POSITIVE = TRUE", state)
-    .then(data => {
-      var numTrumpPositive = 0;
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].candidate === 'trump') {
-          numTrumpPositive++;
-        }
-      }
-      var percentTrumpPositive = data.length !== 0 ? 50 * (numTrumpPositive / data.length) : 50;
-      console.log(state, percentTrumpPositive);
-      db.none(
-        `UPDATE states SET PERCENT_POSITIVE = $1 WHERE STATE = $2;
-        INSERT INTO states (PERCENT_POSITIVE, STATE)
-          SELECT $1, $2
-          WHERE NOT EXISTS (SELECT 1 FROM states WHERE STATE = $2);`, 
-        [percentTrumpPositive, state]
-      ).catch(catchError);
-    }).catch(catchError);
-  });
+var calcMap = function () {
+    db.tx(t=> {
+        return stateCodes.map(state=> {
+            var numTrumpPositive = 0;
+            return t.each("SELECT CANDIDATE FROM locations WHERE STATE = $1 AND POSITIVE = TRUE", state, c=> {
+                numTrumpPositive += c.candidate === 'trump' ? 1 : 0;
+            })
+                .then(data=> {
+                    var percentTrumpPositive = data.length ? 50 * (numTrumpPositive / data.length) : 50;
+                    console.log(state, percentTrumpPositive);
+                    return t.none(`UPDATE states SET PERCENT_POSITIVE = $1 WHERE STATE = $2;
+                                INSERT INTO states (PERCENT_POSITIVE, STATE)
+                                SELECT $1, $2
+                                WHERE NOT EXISTS (SELECT 1 FROM states WHERE STATE = $2);`,
+                        [percentTrumpPositive, state])
+                });
+        });
+    })
+        .catch(catchError);
 };
+
 calcMap();
 setInterval(calcMap, INTERVAL);

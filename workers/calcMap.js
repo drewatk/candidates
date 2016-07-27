@@ -23,10 +23,14 @@ var calcMap = function() {
       }
       var percentTrumpPositive = data.length !== 0 ? 50 * (numTrumpPositive / data.length) : 50;
       console.log(state, percentTrumpPositive);
-      db.none("INSERT INTO states VALUES ($1, $2)", [state, percentTrumpPositive])
-      .catch(catchError);
-    })
-    .catch(catchError);
+      db.none(
+        `UPDATE states SET PERCENT_POSITIVE = $1 WHERE STATE = $2;
+        INSERT INTO states (PERCENT_POSITIVE, STATE)
+          SELECT $1, $2
+          WHERE NOT EXISTS (SELECT 1 FROM states WHERE STATE = $2);`, 
+        [percentTrumpPositive, state]
+      ).catch(catchError);
+    }).catch(catchError);
   });
 };
 calcMap();

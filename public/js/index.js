@@ -130,9 +130,7 @@ var main = function() {
   var d1 = $.get('/js/stateAreas.json'); // these are jQuery deffered objects
   var d2 = $.get('/tweets/states');
   $.when(d1, d2).done(function(stateAreas, states) {
-    console.log(states[0]);
     states = _.keyBy(states[0], 'state');
-    console.log(states);
     L.geoJson(stateAreas, { style: function(feature) {
       return {
         fillColor: getColor(states[feature.properties.postalCode].percent_positive),
@@ -140,7 +138,7 @@ var main = function() {
         opacity: 1,
         color: 'white',
         fillOpacity: 0.7
-      }
+      };
     }}).addTo(statesMap);
   });
 

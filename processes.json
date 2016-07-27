@@ -3,7 +3,6 @@
         {
             "name" : "candidates",
             "script"      : "bin/www",
-            "watch"       : true,
             "env": {
                 "NODE_ENV": "production"
             },
@@ -13,7 +12,9 @@
         },{
             "name"       : "recordtwitter",
             "script"     : "workers/recordtwitter.js"
-
+        },{
+            "name": "calcMap",
+            "script" : "workers/calcMap.js"
         }
     ]
 }

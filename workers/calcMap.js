@@ -17,17 +17,17 @@ var calcMap = function() {
     .then(data => {
       var numTrumpPositive = 0;
       for (var i = 0; i < data.length; i++) {
-        if (data.candidate === 'trump') {
+        if (data[i].candidate === 'trump') {
           numTrumpPositive++;
         }
       }
       var percentTrumpPositive = data.length !== 0 ? 50 * (numTrumpPositive / data.length) : 50;
-
+      console.log(state, percentTrumpPositive);
       db.none("INSERT INTO states VALUES ($1, $2)", [state, percentTrumpPositive])
       .catch(catchError);
     })
     .catch(catchError);
-  }
+  });
 };
-
-setTimeout(calcMap, INTERVAL);
+calcMap();
+setInterval(calcMap, INTERVAL);

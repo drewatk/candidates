@@ -13,7 +13,7 @@ var catchError = function(error) {
 
 var calcMap = function () {
     db.tx(t=> {
-        return stateCodes.map(state=> {
+        var queries = stateCodes.map(state=> {
             var numTrumpPositive = 0;
             return t.each("SELECT CANDIDATE FROM locations WHERE STATE = $1 AND POSITIVE = TRUE", state, c=> {
                 numTrumpPositive += c.candidate === 'trump' ? 1 : 0;
@@ -28,6 +28,7 @@ var calcMap = function () {
                         [percentTrumpPositive, state])
                 });
         });
+        return t.batch(queries);
     })
         .catch(catchError);
 };

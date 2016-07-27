@@ -8,13 +8,16 @@
             },
             "env_production" : {
                 "NODE_ENV": "production"
-            }
+            },
+            "watch": false
         },{
             "name"       : "recordtwitter",
-            "script"     : "workers/recordtwitter.js"
+            "script"     : "workers/recordtwitter.js",
+            "watch": false
         },{
             "name": "calcMap",
-            "script" : "workers/calcMap.js"
+            "script" : "workers/calcMap.js",
+            "watch": false
         }
     ]
 }

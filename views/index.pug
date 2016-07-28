@@ -2,15 +2,20 @@ extends layout
 
 block content
   h1 Candidates #[small Polling the 2016 Presidential Race with Twitter]
-  .row
-    .col.md-12#map-col
-      h1 Map #[small Share of Positive Tweets by State]
+  .row#map-title
+    .col-md-6
+      h2 Map #[small Share of Positive Tweets by State]
+    .col-md-6.pull-right.key
+      p Hilary Clinton  #[i.fa.fa-square#clinton-color(aria-hidden='true')]
+      p Donald Trump  #[i.fa.fa-square#trump-color(aria-hidden='true')]
+  .row#map-row
+    .col-md-12
       #states-map
-  .row
-    .col.md-12#graphs-header
+  .row.graphs-header
+    .col.md-6
       h2 Graphs
       div
-        p Displaying data from the past 
+        p  Displaying data from the past 
         .dropdown
           a.dropdown-toggle#intervalDropdown(data-toggle='dropdown', aria-haspopup='true', aria-expanded='true') Hour 
             span.caret
@@ -19,6 +24,9 @@ block content
             li#day(data-interval='day') #[a Day]
             li#week(data-interval='week') #[a Week]
             li#monthly(data-interval='month') #[a Month]
+    .col-md-6.pull-right.key
+      p Hilary Clinton  #[i.fa.fa-square#clinton-color(aria-hidden='true')]
+      p Donald Trump  #[i.fa.fa-square#trump-color(aria-hidden='true')]
   .row
     .col-md-6
       h4 Popularity #[small Number of Tweets Per Hour]

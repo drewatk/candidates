@@ -15,18 +15,36 @@ body {
   padding-right: 15px;
 }
 
-#map-col {
-  padding-bottom: 10px;
-}
-
 #states-map {
   height: 500px;
 }
 
-#graphs-header .dropdown {
+.graphs-header .dropdown {
   display: inline;
 }
 
-#graphs-header p {
+.graphs-header p, .graphs-header div, .graphs-header h2 {
   display: inline;
+  margin-left: 3px;
+}
+
+.graphs-header {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.graphs-header .key {
+  margin-top : 10px;
+}
+
+.key {
+  text-align: right;
+}
+
+#trump-color {
+  color: $red;
+}
+
+#clinton-color {
+  color: $blue;
 }

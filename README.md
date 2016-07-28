@@ -4,6 +4,12 @@ Polling the 2016 Presidential Race with Twitter and Natural Language Processing:
 
 ## Questions and Answers
 
+#### Q. How is each graph or map calculated?
+**A.**
+- The map of states takes all positive tweets that were geocoded, and takes the average share of positive tweets about each candidate to determine a rough "vote share" for every state.
+- The popularity graph charts the popularity of each candidate, counted by number of tweets per hour in 5 minute incriments.
+- The sentiment grap charts the percentage of tweets about each candidate that are positive, calculated every 5 minutes by a Natural Language Classifier (Naive Bayes).
+
 #### Q. Why did you make this project?
 **A.** I wanted to use my knowledge of Node.js and Express, but also learn to incorporate an SQL Database. I also have been getting more interested in Natural Language Processing and Data Science.
 The natural intersection of all of these things was a project involving the presidential election. I chose twitter as the source of the data because I think that traditional phone polls are going to, eventually, become less reliable as less people have landline phones.

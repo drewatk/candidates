@@ -1,11 +1,16 @@
 extends layout
 
 block content
+  a(href='https://github.com/drewatk/candidates')
+    img(style='position: absolute; top: 0; right: 0; border: 0;', src='https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67', alt='Fork me on GitHub', data-canonical-src='https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png')
+
   h1 Twitter Candidates #[small Polling the 2016 Presidential Race with Twitter]
   .row#map-title
-    .col-md-6
-      h2 Map #[small Share of Positive Tweets by State]
-    .col-md-6.pull-right.key
+    .col-md-10
+      h2 Map 
+        small Share of Positive Tweets by State  
+        i.fa.fa-question-circle-o(data-toggle='popover', title='How is this calculated?' data-content='This map takes all positive tweets that were geocoded, and takes the average share for each candidate for each state to determine a rough "vote share."', data-trigger='hover')
+    .col-md-2.pull-right.key
       p Hilary Clinton  #[i.fa.fa-square#clinton-color(aria-hidden='true')]
       p Donald Trump  #[i.fa.fa-square#trump-color(aria-hidden='true')]
   .row#map-row
@@ -29,11 +34,18 @@ block content
       p Donald Trump  #[i.fa.fa-square#trump-color(aria-hidden='true')]
   .row
     .col-md-6
-      h4 Popularity #[small Number of Tweets Per Hour]
+      h4 Popularity 
+        small Number of Tweets Per Hour  
+        i.fa.fa-question-circle-o(data-toggle='popover', title='How is this calculated?' data-content='This graphs the popularity of each candidate, counted by number of tweets per hour in 5 minute incriments.', data-trigger='hover')
       #tweets.ct-chart.ct-square
     .col-md-6
-      h4 Sentiment #[small Percentage of Positive Tweets]
+      h4 Sentiment 
+        small Percentage of Positive Tweets  
+        i.fa.fa-question-circle-o(data-toggle='popover', title='How is this calculated?' data-content='This graphs the percentage of tweets about each candidate that are positive, calculated every 5 minutes by a Natural Language Classifier (Naive Bayes).', data-trigger='hover')
       #sentiment.ct-chart.ct-square
+    .row
+      .col-md-12
+        p.text-center Made by #[a(href='http://www.drewatkinson.me') Drew Atkinson] - See the code on #[a(href='https://github.com/drewatk/candidates') Github]
 
     script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
     // Latest compiled and minified Bootstrap JavaScript

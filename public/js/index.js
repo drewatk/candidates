@@ -144,6 +144,9 @@ var main = function() {
     }}).addTo(statesMap);
   });
 
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  });
 };
 
 $(document).ready(main);

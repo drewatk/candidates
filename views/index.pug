@@ -10,6 +10,7 @@ block content
     .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 
   h1 Twitter Candidates #[small Polling the 2016 Presidential Race with Twitter]
+  p #[a(href='/readme') About this project]
   .row#map-title
     .col-md-10
       h2 Map 
@@ -48,15 +49,15 @@ block content
         small Percentage of Positive Tweets  
         i.fa.fa-question-circle-o(data-toggle='popover', title='How is this calculated?' data-content='This graphs the percentage of tweets about each candidate that are positive, calculated every 5 minutes by a Natural Language Classifier (Naive Bayes).', data-trigger='hover')
       #sentiment.ct-chart.ct-square
-    .row
-      .col-md-12
-        p.text-center Made by #[a(href='http://www.drewatkinson.me') Drew Atkinson] - See the code on #[a(href='https://github.com/drewatk/candidates') Github]
-
-    script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
-    // Latest compiled and minified Bootstrap JavaScript
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
-    script(src='//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js')
-    script(src='https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js')
-    script(src='/vendor/moment.js')
-    script(src='/vendor/lodash.js')
-    script(src='/js/index.js')
+  .row
+    .col-md-12
+      p.text-center Made by #[a(href='http://www.drewatkinson.me') Drew Atkinson] - See the code on #[a(href='https://github.com/drewatk/candidates') Github]
+    
+  script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
+  // Latest compiled and minified Bootstrap JavaScript
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
+  script(src='//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js')
+  script(src='https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js')
+  script(src='/vendor/moment.js')
+  script(src='/vendor/lodash.js')
+  script(src='/js/index.js')

@@ -1,4 +1,4 @@
-# Twitter Candidates 
+# [Twitter Candidates](https://candidates.drewatkinson.me/) 
 Polling the 2016 Presidential Race with Twitter and Natural Language Processing: 
 [candidates.drewatkinson.me](https://candidates.drewatkinson.me/)
 

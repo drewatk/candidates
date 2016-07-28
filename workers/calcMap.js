@@ -15,7 +15,7 @@ var calcMap = function () {
   db.tx(t=> {
     var queries = stateCodes.map(state=> {
       var numTrumpPositive = 0;
-      return t.each("SELECT CANDIDATE FROM locations WHERE STATE = $1 AND POSITIVE = TRUE", state, c=> {
+      return t.each("SELECT CANDIDATE FROM locations WHERE TIME >= NOW() - '1 month'::INTERVAL AND STATE = $1 AND POSITIVE = TRUE", state, c=> {
         numTrumpPositive += c.candidate === 'trump' ? 1 : 0;
       })
       .then(data=> {

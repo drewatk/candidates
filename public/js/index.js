@@ -1,7 +1,8 @@
 var tweetsChart = new Chartist.Line('#tweets', {});
 var sentimentChart = new Chartist.Line('#sentiment', {});
 
-var updateGraphs = function(interval = 'hour') {
+var updateGraphs = function(interval) {
+  interval = interval || 'hour';
   $.get('/tweets/' + interval, function(data) {
     var trumpTweets = _.filter(data, function(t) {
       return (t.candidate === 'trump');

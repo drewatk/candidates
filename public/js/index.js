@@ -117,8 +117,9 @@ var getColor = function(d) {
 var main = function() {
   updateGraphs();
 
-  $('.btn').click(function(event) {
+  $('li').click(function(event) {
     updateGraphs($(this).data('interval'));
+    $('.dropdown-toggle').html($(this).find('a').text() + ' <span class="caret"></span>');
   });
 
   // set up the Leaflet map

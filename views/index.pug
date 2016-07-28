@@ -4,21 +4,27 @@ block content
   h1 Candidates #[small Polling the 2016 Presidential Race with Twitter]
   .row
     .col.md-12#map-col
-      h3 Map #[small Share of Positive Tweets by State]
+      h1 Map #[small Share of Positive Tweets by State]
       #states-map
   .row
-    .col.md-12
-      .btn-group.btn-group-sm(role='group' aria-label='Change frequency of graph')
-        button#hour.btn.btn-default(type='button' data-interval='hour') Hour
-        button#day.btn.btn-default(type='button' data-interval='day') Day
-        butotn#week.btn.btn-default(type='button' data-interval='week') Week
-        button#monthly.btn.btn-default(type='button' data-interval='month') Month
+    .col.md-12#graphs-header
+      h2 Graphs
+      div
+        p Displaying data from the past 
+        .dropdown
+          a.dropdown-toggle#intervalDropdown(data-toggle='dropdown', aria-haspopup='true', aria-expanded='true') Hour 
+            span.caret
+          ul.dropdown-menu(aria-lavelledby='intervalDropdown')
+            li#hour(data-interval='hour') #[a Hour]
+            li#day(data-interval='day') #[a Day]
+            li#week(data-interval='week') #[a Week]
+            li#monthly(data-interval='month') #[a Month]
   .row
     .col-md-6
-      h3 Popularity #[small Number of Tweets Per Hour]
+      h4 Popularity #[small Number of Tweets Per Hour]
       #tweets.ct-chart.ct-square
     .col-md-6
-      h3 Sentiment #[small Percentage of Positive Tweets]
+      h4 Sentiment #[small Percentage of Positive Tweets]
       #sentiment.ct-chart.ct-square
 
     script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
